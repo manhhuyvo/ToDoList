@@ -1,0 +1,76 @@
+<%- include("header") -%>
+        <p class="today-header"><span style="color: #F1A661;">Today is: </span><%= today %></p>
+        <button type="button" class="btn btn-info switch-btn" id="normal-switch"><a class="switch-link" href="./">Normal</a></button>
+        <button type="button" class="btn btn-success switch-btn" id="work-switch"><a class="switch-link" href="./work">Work</a></button>
+
+        <h1 class="date-header"><%= listTitle %></h1>
+        
+        <div class="content-container">
+            <form class="form row" action="/" method="post">
+                    <div class="col-sm-9 input-elements-container">
+                        <input type="text" name ="newTask" placeholder="new task..."class="new-task-input form-control" autocomplete="off"/>
+                    </div>
+                    <div class="col-sm-3 button-elements-container">
+                        <button type="submit" class="btn btn-info add-btn" name ="submitList" value=<%= listTitle %>>Add</button>
+                    </div>
+            </form>
+            <ul class="list-ul-container">
+                <% for (var x = 0; x < listLength; x++) {%>
+                    <li>
+                        <form action="/action" method="POST">
+                            <input type="checkbox" class="list-checkbox">
+                            <input type="hidden" name="requestCategory" value="<%= theNewTask[x].itemCategory%>">
+                            <span class="edit-icon"><i class="fa-solid fa-pen-to-square action-btn edit-btn"></i></span>
+                            <span class="remove-icon"><button class="action-btn" name="actionType" value="Remove"><i class="fa-solid fa-trash"></i></button></span>
+                            <span class="item-content">
+                                <input type="hidden" name="requestContent" value="<%= theNewTask[x].itemDescription %>"><%= theNewTask[x].itemDescription %></input>
+                                <input type="text" name="newEditContent" class="editInput editInput-<%= x %> form-control">
+                                <div class="updateBtnContainer">
+                                    <button type="submit" class="btn btn-success updateBtn updateBtn-<%= x %>" name="actionType" value="Update">Update</button>
+                                </div>
+                            </span>
+                        </form>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+        <script>// Create the effect of checked and unchecked the items // name="actionType" value="Edit"
+            $(".list-checkbox").change(function() { // event handler for checkbox status changed
+                $(".list-checkbox").each(function(index){ // Tapping to the index of each element in the checkbox list
+                    var currentContent = document.getElementsByClassName("item-content")[index];
+                    if(this.checked) {
+                        currentContent.classList.add("lineThrough");
+                    } else {
+                        currentContent.classList.remove("lineThrough");
+                    }
+                })
+                
+            });
+
+            $(".editInput").hide();
+            $(".updateBtn").hide();
+
+            var editBtn = document.getElementsByClassName("edit-btn");
+            $(".edit-btn").click(function (){
+                for (var i = 0; i < editBtn.length; i++){
+                    if (editBtn[i] == this){
+                        if($(".editInput-" + i).is(":visible"))
+                        {
+                            $(".editInput-" + i).hide();
+                        } else {
+                            $(".editInput-" + i).show();
+                        }
+                        if($(".updateBtn-"+i).is(":visible"))
+                        {
+                            $(".updateBtn-" + i).hide();
+                        } else {
+                            $(".updateBtn-" + i).show();
+                        }
+                        //console.log ("The button clicked is: " + i);
+                        break;
+                    }
+                }
+            })
+        </script>
+<%- include("footer") -%>
+

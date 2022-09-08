@@ -1,0 +1,169 @@
+.date-header{
+    border: 2px solid #277BC0;
+    background-color: white;
+    color: #277BC0;
+    text-align: center;
+    font-size: 2rem;
+    padding: 15px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+}
+.today-header{
+    color: #277BC0;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 0    ;
+    font-size: 18px;
+    text-align: right;
+}
+.input-elements-container{
+    padding: 0 10px 0 0;
+    margin: 0;
+}
+.button-elements-container{
+    padding: 0;
+    margin: 0;
+}
+.content-container{
+    background-color: white;
+    border: 2px solid #277BC0;
+    border-radius: 10px;
+    padding: 40px 50px;
+}
+.form{
+    padding: 0 10px;
+    margin-bottom: 40px;
+}
+.new-task-input{
+    width: 100%;
+    padding: 10px;
+}
+.add-btn{
+    width: 100%;
+    background-color: #277BC0;
+    padding: 15px;
+    font-size: 0.8rem;
+}
+.list-ul-container{
+    padding: 0;
+}
+.list-checkbox{
+    margin-right: 10px;
+}
+.action-btn{
+    padding: 0;
+    border-style: none;
+}
+.remove-icon{
+    margin-right: 10px;
+}
+.edit-icon{
+    margin-right: 10px;
+}
+
+input.list-checkbox{
+    width: 1rem;
+    height: 1rem;
+    position: relative;
+    top: 3px;
+}
+.lineThrough{
+    text-decoration: line-through;
+}
+
+li{
+    list-style: none;
+    padding: 12px;
+    background-color: #EEEEEE;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+body{
+    padding: 5% 27%;
+    background-image: linear-gradient(to bottom right,#FEFBF6, #FCF8E8);
+}
+footer{
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #9D9D9D;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.switch-btn{
+    display: inline;
+    padding: 13px 30px;
+    margin: 20px 0;
+    width: 25%;
+}
+#normal-switch{
+    background-color: #9C9EFE;
+}
+#normal-switch:hover{
+    background-color: #A66CFF;
+}
+#work-switch{
+    background-color: #F1A661;
+}
+#work-switch:hover{
+    background-color: #FF7F3F;
+}
+.switch-link{
+    text-decoration: none;
+    color: white;
+    padding: 13px 20px;
+}
+.switch-btn a:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.updateBtnContainer{
+    text-align: right;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.updateBtn{
+    margin-top: 10px;
+}
+
+
+@media only screen and (max-width: 1000px){
+    body{
+        padding: 5% 12%;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    .content-container, .date-header{
+        width: 100%;
+    }
+    body{
+        padding: 5%;
+    }
+    
+    .input-elements-container{
+        padding: 0;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    .button-elements-container{
+        width: 100%;
+    }
+    .date-header{
+        font-size: 1.5rem;
+    }
+    li{
+        font-size: 0.8rem;
+    }
+    
+    .new-task-input{
+        font-size: 0.7 rem;
+    }
+    .add-btn{
+        font-size: 0.7rem;
+    }
+}
