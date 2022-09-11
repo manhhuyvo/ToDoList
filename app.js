@@ -15,7 +15,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 /* Database declaration and connection*/
-const mongooseURL = "mongodb://localhost:27017/todoListDB";
+//const mongooseURL = "mongodb://localhost:27017/todoListDB";
+const pass = "test123";
+const dbName = "ToDoListDB";
+const mongooseURL = "mongodb+srv://manhhuyvo:" + pass + "@cluster0.wg8ywvl.mongodb.net/" + dbName;
 
 mongoose.connect(mongooseURL, function(err){
     if(err){
