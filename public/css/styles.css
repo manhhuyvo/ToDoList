@@ -217,6 +217,7 @@ footer{
     font-family: "Montserrat-black", sans-serif;
 }
 .register-form-container{
+    margin: auto;
     width: 80%;
     background-color: white;
     padding: 60px 60px;
