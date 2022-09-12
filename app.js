@@ -113,7 +113,7 @@ app.get("/work", function(req, res){
     let dayModule = date.getCurrentDate();
     if(currentSession.username != "")
     {
-        itemModel.find({itemCategory: "Work"}, function(err, returnedItems){
+        itemModel.find({itemCategory: "Work", user: currentSession.username}, function(err, returnedItems){
             if(err){
                 console.log(err);
             } else {
