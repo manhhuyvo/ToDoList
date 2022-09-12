@@ -141,6 +141,7 @@ footer{
 
 /* Log in screen */
 .form-container{
+    margin:auto;
     width: 80%;
     background-color: white;
     padding: 60px 60px;
