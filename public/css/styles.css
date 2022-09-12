@@ -12,10 +12,19 @@
     color: #277BC0;
     font-weight: bold;
     font-style: italic;
-    margin-bottom: 0    ;
+    margin-bottom: 0   ;
     font-size: 18px;
     text-align: right;
 }
+
+.username-header{
+    color: #277BC0;
+    font-weight: bold;
+    margin-bottom: 0    ;
+    font-size: 30px;
+    text-align: left;
+}
+
 .input-elements-container{
     padding: 0 10px 0 0;
     margin: 0;
@@ -130,10 +139,121 @@ footer{
     margin-top: 10px;
 }
 
+/* Log in screen */
+.form-container{
+    width: 80%;
+    background-color: white;
+    padding: 60px 60px;
+    border-radius: 10px;
+    border: 2px solid #277BC0;
+}
+.username-container{
+    margin: 20px 0;
+}
+.username-input{
+    padding: 7px;
+}
+.password-container{
+    margin: 20px 0;
+}
+.password-input{
+    padding: 7px;
+}
+
+.login-btn-container{
+    text-align: center;
+}
+.login-header{
+    text-align: center;
+    color: #277BC0;
+    font-family: "Montserrat-black", sans-serif;
+}
+.login-btn{
+    width: 50%;
+    margin: 10px 0 25px 0;
+    background-color: #277BC0;
+    color: white;
+}
+.login-btn:hover{
+    color: white;
+    background-color: #002B5B;
+}
+.not-a-member{
+    margin-top: 10px;
+    margin-bottom: 0;
+    display: inline;
+}
+.register-now-link{
+    display: inline;
+    margin-left: 10px;
+}
+.register-now-link:hover{
+    color: #F65A83;
+}
+.not-a-member-container{
+    text-align: center;
+}
+.signUp-validation{
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Sign Up Screen */
+.register-btn{
+    width: 50%;
+    margin: 10px 0 25px 0;
+    background-color: #E38B29;
+    color: white;
+}
+.register-btn:hover{
+    color: white;
+    background-color: #D07000;
+}
+.register-header{
+    text-align: center;
+    color: #E38B29;
+    font-family: "Montserrat-black", sans-serif;
+}
+.register-form-container{
+    width: 80%;
+    background-color: white;
+    padding: 60px 60px;
+    border-radius: 10px;
+    border: 2px solid #E38B29;
+}
+
+/* log out btn */
+.logout-btn-container{
+    width: 100%;
+    text-align: right;
+}
+.logout-btn{
+    display: inline;
+    padding: 13px 30px;
+    margin: 20px 0;
+    width: 25%;
+    background-color: #E94560;
+}
+.logout-btn:hover{
+    background-color: #EB1D36;
+
+}
+.logout-link{
+    width: 100%;
+    color: white;
+    padding: 10px 15px;
+}
+.logout-link:hover{
+    color: white;
+}
 
 @media only screen and (max-width: 1000px){
     body{
         padding: 5% 12%;
+    }
+    .logout-link{
+        padding: 10px;
     }
 }
 
@@ -143,6 +263,9 @@ footer{
     }
     body{
         padding: 5%;
+    }
+    .logout-link{
+        padding: 5px;
     }
     
     .input-elements-container{

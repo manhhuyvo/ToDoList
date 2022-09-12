@@ -1,0 +1,25 @@
+<%- include("header") -%>
+
+  <!-- Pills content -->
+  <div class="register-form-container">
+    <h1 class="register-header">REGISTER</h1>
+    <form action="/signup" method="POST">
+        <div class="username-container">
+            <label for="username" class="label-login">Username</label>
+            <input type="text" class="username-input form-control" name="registerUsername" required>
+        </div>
+        <div class="password-container">            
+            <label for="username" class="label-login">Password</label>
+            <input type="password" class="password-input form-control" name="registerPassword" required>
+        </div>
+        <div class="login-btn-container">
+            <button type="submit" class="register-btn btn btn-lg">Register</button>
+        </div>
+    </form>
+    <div class="not-a-member-container">
+        <p class="not-a-member">Already have an account?</p><a href="./login" class="register-now-link">Log In Now</a>
+    </div>
+    <p class="signUp-validation"><%= validationResult %></p>
+  </div>
+
+<% - include("footer") -%>

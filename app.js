@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
@@ -14,11 +15,21 @@ app.use(bodyParser.urlencoded({
     extended:true
 }));
 
+app.use(session({
+    secret: "Shh, its a secret!",
+    cookie:{
+        maxAge: 6000
+    }
+}));
+
 /* Database declaration and connection*/
 //const mongooseURL = "mongodb://localhost:27017/todoListDB";
 const pass = "test123";
 const dbName = "ToDoListDB";
 const mongooseURL = "mongodb+srv://manhhuyvo:" + pass + "@cluster0.wg8ywvl.mongodb.net/" + dbName;
+let currentSession = "";
+let signUpValidation = "";
+let = signInValidation = "";
 
 mongoose.connect(mongooseURL, function(err){
     if(err){
@@ -33,45 +44,92 @@ mongoose.connect(mongooseURL, function(err){
 const itemSchema = mongoose.Schema({ // schema
     itemDescription: String,
     itemCategory: String,
+    user: String
 })
+
+const userSchema = mongoose.Schema({
+    username: String,
+    password: String
+})
+
 const itemModel = mongoose.model("items", itemSchema); //model
+const userModel = mongoose.model("users", userSchema);
 /* Schemas and models declaration */
 
 
 /* Display list of items on homepage and work */
+app.get("/login", function(req, res){
+    if(currentSession != "")
+    {
+        res.redirect("/");
+    } else {  
+        res.render("login", {
+            validationResult: signInValidation
+        });
+        signInValidation = "";
+    }
+})
+
+app.get("/signup", function(req, res){
+    if(currentSession != "")
+    {
+        res.redirect("/");
+    } else {  
+        res.render("signup",{
+            validationResult: signUpValidation
+        });
+        signUpValidation = "";
+    }
+})
+
+app.get("/logout", function(req, res){
+    currentSession = "";
+    res.redirect("/");
+})
 // List of normal items
 app.get("/", function(req, res){    
     let dayModule = date.getCurrentDate();
-    itemModel.find({itemCategory: "Normal"}, function(err, returnedItems){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("list", {
-                today: dayModule,
-                listTitle: "Normal Daily List",
-                listLength: returnedItems.length,
-                theNewTask: returnedItems
-            });
-        }
-    })
+    if(currentSession != "")
+    {
+        itemModel.find({itemCategory: "Normal", user: currentSession.username}, function(err, returnedItems){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("list", {
+                    today: dayModule,
+                    listTitle: "Normal Daily List",
+                    listLength: returnedItems.length,
+                    theNewTask: returnedItems,
+                    sessionUsername: currentSession.username
+                });
+            }
+        })
+    } else{
+        res.redirect("/login");
+    }
 });
 // List of work items
 app.get("/work", function(req, res){
     let dayModule = date.getCurrentDate();
-
-    itemModel.find({itemCategory: "Work"}, function(err, returnedItems){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("list", {
-                today: dayModule,
-                listTitle: "Work Daily List",
-                listLength: returnedItems.length,
-                theNewTask: returnedItems
-            });
-            console.log(returnedItems);
-        }
-    })
+    if(currentSession.username != "")
+    {
+        itemModel.find({itemCategory: "Work"}, function(err, returnedItems){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("list", {
+                    today: dayModule,
+                    listTitle: "Work Daily List",
+                    listLength: returnedItems.length,
+                    theNewTask: returnedItems,
+                    sessionUsername: currentSession.username
+                });
+                console.log(returnedItems);
+            }
+        })
+    } else {
+        res.render("login");
+    }
 });
 /* Display list of items on homepage and work */
 
@@ -80,8 +138,9 @@ app.post("/", function(req, res){
 
     let newItemDescription = req.body.newTask;
     let newItemCategory = req.body.submitList;
+    //console.log(currentSession.username);
 
-    addNewItems(newItemDescription,newItemCategory);
+    addNewItems(newItemDescription,newItemCategory, currentSession.username);
 
     if(newItemCategory == "Work"){
         res.redirect("/work");
@@ -116,11 +175,58 @@ app.post("/action", function(req, res){ // POST request data for CRUD operation
     }
 })
 
+app.post("/signup", function(req, res){
+    let username = req.body.registerUsername;
+    let password = req.body.registerPassword;
+    userModel.find({
+        username: username
+    }, function(err, returnedUser){
+        if(err){
+            console.log(err);
+        } else {
+            if(returnedUser.length > 0)
+            {
+                signUpValidation = "This username has already existed. Please enter a valid username!";
+                res.redirect("/signup");
+            } else {
+                addNewUser(username, password);
+                res.redirect("/login");
+            }
+        }
+    })
+})
+
+app.post("/login", function(req, res){
+    let loginUsername = req.body.SigninUsername;
+    let loginPassword = req.body.SigninPassword;
+    
+    userModel.find({
+        username: loginUsername,
+        password: loginPassword
+    }, function(err, returnedUser){
+        if(err){
+            console.log(err);
+        } else {
+            if(returnedUser.length > 0)
+            {
+                currentSession = req.session;
+                currentSession.username = loginUsername;
+                res.redirect("/");
+                //console.log(currentSession.username);
+            } else {
+                signInValidation = "Your details doesn't match with our records. Please try again!";
+                res.redirect("/login");
+            }
+        }
+    })
+})
+
 /* CRUD operations */
-function addNewItems (description, category){
+function addNewItems (description, category, userName){
     let newItem = new itemModel ({ // CREATE OPERATION
         itemDescription: description,
-        itemCategory: category
+        itemCategory: category,
+        user: userName
     })
     newItem.save(function(err)
     {
@@ -148,6 +254,20 @@ function updateItems(newContent, description){ // UPDATE
             console.log(err);
         } else {
             console.log("Updated successfully");
+        }
+    })
+}
+
+function addNewUser(un, pw){
+    let newUser = new userModel({
+        username: un,
+        password: pw
+    })
+    newUser.save(function(err){
+        if(err){
+            console.log(err);
+        } else {
+            console.log("User added successfully");
         }
     })
 }

@@ -1,4 +1,5 @@
 <%- include("header") -%>
+        <p class="username-header">Welcome, <%= sessionUsername %>!</p>
         <p class="today-header"><span style="color: #F1A661;">Today is: </span><%= today %></p>
         <button type="button" class="btn btn-info switch-btn" id="normal-switch"><a class="switch-link" href="./">Normal</a></button>
         <button type="button" class="btn btn-success switch-btn" id="work-switch"><a class="switch-link" href="./work">Work</a></button>
@@ -33,6 +34,9 @@
                     </li>
                 <% } %>
             </ul>
+        </div>
+        <div class="logout-btn-container">
+            <button type="button" class="btn btn-info logout-btn"><a class="logout-link" href="./logout">Log Out</a></button>
         </div>
         <script>// Create the effect of checked and unchecked the items // name="actionType" value="Edit"
             $(".list-checkbox").change(function() { // event handler for checkbox status changed

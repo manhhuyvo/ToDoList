@@ -1,0 +1,25 @@
+<%- include("header") -%>
+
+  <!-- Pills content -->
+  <div class="form-container">
+    <h1 class="login-header">SIGN IN</h1>
+    <form action="/login" method="POST">
+        <div class="username-container">
+            <label for="username" class="label-login">Username</label>
+            <input type="text" class="username-input form-control" name="SigninUsername" required>
+        </div>
+        <div class="password-container">            
+            <label for="username" class="label-login">Password</label>
+            <input type="password" class="password-input form-control" name="SigninPassword" required>
+        </div>
+        <div class="login-btn-container">
+            <button type="submit" class="login-btn btn btn-lg">Sign In</button>
+        </div>
+    </form>
+    <div class="not-a-member-container">
+        <p class="not-a-member">Don't have an account?</p><a href="./signup" class="register-now-link">Register now</a>
+    </div>
+    <p class="signUp-validation"><%= validationResult %></p>
+  </div>
+
+<% - include("footer") -%>
