@@ -26,14 +26,15 @@ app.use(session({
 //const mongooseURL = "mongodb://localhost:27017/todoListDB";
 const pass = "test123";
 const dbName = "ToDoListDB";
-const mongooseURL = "mongodb+srv://manhhuyvo:" + pass + "@cluster0.wg8ywvl.mongodb.net/" + dbName;
+const MongoDBuserName = "manhhuyvo";
+const mongooseURL = "mongodb+srv://" + MongoDBuserName + ":" + pass + "@cluster0.wg8ywvl.mongodb.net/" + dbName;
 let currentSession = "";
 let signUpValidation = "";
 let = signInValidation = "";
 
 mongoose.connect(mongooseURL, function(err){
     if(err){
-        console.log(err);
+        console.log("Error is:" + err);
     } else {
         console.log("Database connected successfully...");
     }
