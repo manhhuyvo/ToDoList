@@ -23,7 +23,8 @@ app.use(session({
 }));
 
 /* Database declaration and connection*/
-//const mongooseURL = "mongodb://localhost:27017/todoListDB";
+// const dbName = "todoListDB";
+// const mongooseURL = "mongodb://localhost:27017/" + dbName;
 const pass = "test123";
 const dbName = "ToDoListDB";
 const MongoDBuserName = "manhhuyvo";
