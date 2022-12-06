@@ -23,12 +23,12 @@ app.use(session({
 }));
 
 /* Database declaration and connection*/
-// const dbName = "todoListDB";
-// const mongooseURL = "mongodb://localhost:27017/" + dbName;
-const pass = "test123";
-const dbName = "ToDoListDB";
-const MongoDBuserName = "manhhuyvo";
-const mongooseURL = "mongodb+srv://" + MongoDBuserName + ":" + pass + "@cluster0.wg8ywvl.mongodb.net/" + dbName;
+const dbName = "todoListDB";
+const mongooseURL = "mongodb://localhost:27017/" + dbName;
+// const pass = "test123";
+// const dbName = "ToDoListDB";
+// const MongoDBuserName = "manhhuyvo";
+// const mongooseURL = "mongodb+srv://" + MongoDBuserName + ":" + pass + "@cluster0.wg8ywvl.mongodb.net/" + dbName;
 let currentSession = "";
 let signUpValidation = "";
 let = signInValidation = "";
